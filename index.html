@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Pac-Man Arcade</title>
-    <meta name="description" content="A complete, fully functional classic Pac-Man arcade maze chase game built with HTML5 Canvas, procedural graphics, Ghost AI, and Web Audio effects." />
-    <meta property="og:title" content="Pac-Man Arcade" />
-    <meta property="og:description" content="A complete, fully functional classic Pac-Man arcade maze chase game built with HTML5 Canvas, procedural graphics, Ghost AI, and Web Audio effects." />
+    <title>Flappy Bird Arcade</title>
+    <meta name="description" content="A classic retro Flappy Bird arcade game built with HTML5 Canvas, procedural graphics, dynamic physics, and Web Audio effects." />
+    <meta property="og:title" content="Flappy Bird Arcade" />
+    <meta property="og:description" content="A classic retro Flappy Bird arcade game built with HTML5 Canvas, procedural graphics, dynamic physics, and Web Audio effects." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <style>
@@ -22,34 +22,34 @@
       body {
         min-height: 100vh;
         min-height: 100dvh;
-        background: radial-gradient(circle at 50% 30%, #111422 0%, #080911 60%, #030407 100%);
+        background: radial-gradient(circle at 50% 30%, #171b26 0%, #0d0f17 60%, #06070a 100%);
         color: #f1f5f9;
-        font-family: 'Press Start 2P', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+        font-family: 'Press Start 2P', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        overflow-x: hidden;
+        overflow: hidden;
         touch-action: manipulation;
-        padding: 10px 8px;
+        padding: 8px;
       }
 
-      /* Arcade Machine Bezel Frame */
+      /* Arcade Machine Frame */
       .arcade-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
-        max-width: 460px;
+        max-width: 440px;
         position: relative;
       }
 
       .arcade-bezel {
-        background: linear-gradient(180deg, #1e2233 0%, #101320 100%);
-        border: 3px solid #2d344d;
-        box-shadow: 0 0 0 1px #040509, 0 16px 45px rgba(0, 0, 0, 0.85), inset 0 2px 2px rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, #242938 0%, #151824 100%);
+        border: 3px solid #333a4f;
+        box-shadow: 0 0 0 1px #090a0f, 0 16px 40px rgba(0, 0, 0, 0.8), inset 0 2px 2px rgba(255, 255, 255, 0.12);
         border-radius: 16px;
-        padding: 12px 12px 10px;
+        padding: 14px 14px 12px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -61,7 +61,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         padding: 0 4px;
       }
 
@@ -74,23 +74,23 @@
       .arcade-led {
         width: 10px;
         height: 10px;
-        background-color: #eab308;
+        background-color: #22c55e;
         border-radius: 50%;
-        box-shadow: 0 0 8px #eab308, inset 0 1px 2px rgba(255,255,255,0.8);
-        animation: pulseLed 2.2s infinite ease-in-out;
+        box-shadow: 0 0 8px #22c55e, inset 0 1px 2px rgba(255,255,255,0.7);
+        animation: pulseLed 2.5s infinite ease-in-out;
       }
 
       @keyframes pulseLed {
-        0%, 100% { opacity: 0.95; transform: scale(1); }
-        50% { opacity: 0.45; transform: scale(0.9); }
+        0%, 100% { opacity: 0.9; }
+        50% { opacity: 0.45; }
       }
 
       .arcade-title {
         font-size: 13px;
         font-weight: 800;
         letter-spacing: 1.5px;
-        color: #facc15;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(250, 204, 21, 0.4);
+        color: #f59e0b;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(245, 158, 11, 0.4);
       }
 
       .arcade-actions {
@@ -100,8 +100,8 @@
       }
 
       .sound-btn {
-        background: #191c2b;
-        border: 1px solid #363e58;
+        background: #1e2230;
+        border: 1px solid #3d455d;
         color: #cbd5e1;
         border-radius: 8px;
         padding: 5px 9px;
@@ -115,26 +115,26 @@
       }
 
       .sound-btn:hover {
-        background: #252b40;
+        background: #2a3144;
         color: #ffffff;
-        border-color: #4c577a;
+        border-color: #4f5a78;
       }
 
       .sound-btn:active {
         transform: translateY(1px);
       }
 
-      /* Game Canvas Container */
+      /* Canvas Container */
       .canvas-container {
         position: relative;
         width: 100%;
-        max-width: 420px;
-        aspect-ratio: 420 / 510;
+        max-width: 400px;
+        aspect-ratio: 400 / 600;
         border-radius: 8px;
         overflow: hidden;
-        border: 2px solid #090a14;
-        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.95), 0 4px 16px rgba(0,0,0,0.7);
-        background: #030408;
+        border: 3px solid #10131c;
+        box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.8), 0 4px 16px rgba(0,0,0,0.6);
+        background: #4ec0ca;
         cursor: pointer;
       }
 
@@ -147,75 +147,37 @@
         image-rendering: pixelated;
       }
 
-      /* Mobile Touch D-Pad */
-      .dpad-container {
-        display: grid;
-        grid-template-columns: repeat(3, 48px);
-        grid-template-rows: repeat(3, 44px);
-        gap: 6px;
-        margin-top: 10px;
-        touch-action: none;
-      }
-
-      .dpad-btn {
-        background: linear-gradient(180deg, #242a3e 0%, #161926 100%);
-        border: 1px solid #3a4463;
-        border-radius: 8px;
-        color: #f8fafc;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        cursor: pointer;
-        box-shadow: 0 3px 0 #0d0f17, inset 0 1px 1px rgba(255,255,255,0.15);
-        transition: transform 0.08s ease, background 0.08s ease;
-      }
-
-      .dpad-btn:active, .dpad-btn.active {
-        transform: translateY(2px);
-        box-shadow: 0 1px 0 #0d0f17;
-        background: #3b82f6;
-        color: #ffffff;
-      }
-
-      .dpad-up { grid-column: 2; grid-row: 1; }
-      .dpad-left { grid-column: 1; grid-row: 2; }
-      .dpad-center {
-        grid-column: 2;
-        grid-row: 2;
-        background: #111420;
-        border: 1px solid #202638;
-        box-shadow: none;
-        cursor: default;
-        pointer-events: none;
-      }
-      .dpad-right { grid-column: 3; grid-row: 2; }
-      .dpad-down { grid-column: 2; grid-row: 3; }
-
-      /* Desktop / Keyboard Hints */
+      /* Arcade Footer Details */
       .arcade-footer {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 8px;
+        margin-top: 10px;
         padding: 0 4px;
-        font-size: 9px;
+        font-size: 10px;
         color: #94a3b8;
         letter-spacing: 0.5px;
       }
 
-      .key-pill {
-        background: #111420;
-        border: 1px solid #2f374e;
-        border-radius: 4px;
-        padding: 2px 5px;
-        color: #facc15;
-        font-weight: 700;
+      .arcade-controls-hint {
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
 
-      .score-counter {
-        color: #38bdf8;
+      .key-pill {
+        background: #11141e;
+        border: 1px solid #333c52;
+        border-radius: 4px;
+        padding: 2px 6px;
+        color: #f8fafc;
+        font-size: 9px;
+        font-weight: 600;
+      }
+
+      .arcade-coin {
+        color: #eab308;
       }
     </style>
   </head>
@@ -224,8 +186,8 @@
       <div class="arcade-bezel">
         <div class="arcade-header">
           <div class="arcade-title-group">
-            <div class="arcade-led"></div>
-            <span class="arcade-title">PAC-MAN ARCADE</span>
+            <div class="arcade-led" id="arcadeLed"></div>
+            <span class="arcade-title">FLAPPY ARCADE</span>
           </div>
           <div class="arcade-actions">
             <button class="sound-btn" id="soundToggleBtn" aria-label="Toggle Sound">
@@ -235,26 +197,17 @@
           </div>
         </div>
 
-        <div class="canvas-container" id="canvasContainer" role="button" tabindex="0" aria-label="Pac-Man Game Canvas">
-          <canvas id="gameCanvas" width="420" height="510"></canvas>
-        </div>
-
-        <!-- On-Screen Virtual D-Pad for Mobile & Touch -->
-        <div class="dpad-container" id="dpadContainer">
-          <button class="dpad-btn dpad-up" data-dir="UP" aria-label="Up">▲</button>
-          <button class="dpad-btn dpad-left" data-dir="LEFT" aria-label="Left">◄</button>
-          <div class="dpad-center"></div>
-          <button class="dpad-btn dpad-right" data-dir="RIGHT" aria-label="Right">►</button>
-          <button class="dpad-btn dpad-down" data-dir="DOWN" aria-label="Down">▼</button>
+        <div class="canvas-container" id="canvasContainer" role="button" tabindex="0" aria-label="Flappy Bird Game Canvas">
+          <canvas id="gameCanvas" width="400" height="600"></canvas>
         </div>
 
         <div class="arcade-footer">
-          <div>
-            <span class="key-pill">ARROWS / WASD</span>
-            <span>TO MOVE</span>
+          <div class="arcade-controls-hint">
+            <span class="key-pill">SPACE</span>
+            <span>or TAP TO FLY</span>
           </div>
-          <div class="score-counter">
-            HI: <span id="bezelHighScore">00</span>
+          <div class="arcade-coin">
+            HI-SCORE: <span id="bezelHighScore">0</span>
           </div>
         </div>
       </div>
@@ -266,8 +219,6 @@
         constructor() {
           this.ctx = null;
           this.muted = false;
-          this.wakaAlt = false;
-          this.lastWakaTime = 0;
         }
 
         init() {
@@ -282,86 +233,108 @@
           }
         }
 
-        playWaka() {
+        playFlap() {
           if (this.muted) return;
           this.init();
           if (!this.ctx) return;
-          const now = this.ctx.currentTime;
-          if (now - this.lastWakaTime < 0.1) return; // Throttle wakas
-          this.lastWakaTime = now;
-
           try {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
-
-            osc.type = 'triangle';
-            const f1 = this.wakaAlt ? 380 : 540;
-            const f2 = this.wakaAlt ? 520 : 360;
-            this.wakaAlt = !this.wakaAlt;
-
-            osc.frequency.setValueAtTime(f1, now);
-            osc.frequency.exponentialRampToValueAtTime(f2, now + 0.08);
-
-            gain.gain.setValueAtTime(0.18, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.09);
-
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-
-            osc.start(now);
-            osc.stop(now + 0.095);
-          } catch (e) {}
-        }
-
-        playPowerPellet() {
-          if (this.muted) return;
-          this.init();
-          if (!this.ctx) return;
-          try {
             const now = this.ctx.currentTime;
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
 
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(140, now);
-            osc.frequency.linearRampToValueAtTime(320, now + 0.2);
-
-            gain.gain.setValueAtTime(0.25, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
-
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-
-            osc.start(now);
-            osc.stop(now + 0.23);
-          } catch (e) {}
-        }
-
-        playEatGhost() {
-          if (this.muted) return;
-          this.init();
-          if (!this.ctx) return;
-          try {
-            const now = this.ctx.currentTime;
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-
-            osc.type = 'square';
+            osc.type = 'sine';
             osc.frequency.setValueAtTime(260, now);
-            osc.frequency.exponentialRampToValueAtTime(900, now + 0.28);
+            osc.frequency.exponentialRampToValueAtTime(560, now + 0.1);
 
-            gain.gain.setValueAtTime(0.28, now);
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.13);
+          } catch (e) {}
+        }
+
+        playScore() {
+          if (this.muted) return;
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const now = this.ctx.currentTime;
+            
+            // Note 1 (E5 - 659Hz)
+            const osc1 = this.ctx.createOscillator();
+            const gain1 = this.ctx.createGain();
+            osc1.type = 'triangle';
+            osc1.frequency.setValueAtTime(659.25, now);
+            gain1.gain.setValueAtTime(0.3, now);
+            gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+            osc1.connect(gain1);
+            gain1.connect(this.ctx.destination);
+            osc1.start(now);
+            osc1.stop(now + 0.13);
+
+            // Note 2 (B5 - 987Hz)
+            const osc2 = this.ctx.createOscillator();
+            const gain2 = this.ctx.createGain();
+            osc2.type = 'triangle';
+            osc2.frequency.setValueAtTime(987.77, now + 0.08);
+            gain2.gain.setValueAtTime(0.35, now + 0.08);
+            gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+            osc2.connect(gain2);
+            gain2.connect(this.ctx.destination);
+            osc2.start(now + 0.08);
+            osc2.stop(now + 0.3);
+          } catch (e) {}
+        }
+
+        playHit() {
+          if (this.muted) return;
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(190, now);
+            osc.frequency.exponentialRampToValueAtTime(40, now + 0.15);
+
+            gain.gain.setValueAtTime(0.4, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.19);
+          } catch (e) {}
+        }
+
+        playDie() {
+          if (this.muted) return;
+          this.init();
+          if (!this.ctx) return;
+          try {
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(320, now);
+            osc.frequency.exponentialRampToValueAtTime(80, now + 0.28);
+
+            gain.gain.setValueAtTime(0.35, now);
             gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
 
             osc.connect(gain);
             gain.connect(this.ctx.destination);
-
             osc.start(now);
-            osc.stop(now + 0.32);
+            osc.stop(now + 0.31);
           } catch (e) {}
         }
 
-        playDeath() {
+        playSwoosh() {
           if (this.muted) return;
           this.init();
           if (!this.ctx) return;
@@ -369,75 +342,17 @@
             const now = this.ctx.currentTime;
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(450, now);
+            osc.frequency.exponentialRampToValueAtTime(150, now + 0.14);
 
-            osc.type = 'sawtooth';
-            // Classic descending warble
-            osc.frequency.setValueAtTime(750, now);
-            osc.frequency.linearRampToValueAtTime(450, now + 0.2);
-            osc.frequency.linearRampToValueAtTime(200, now + 0.5);
-            osc.frequency.linearRampToValueAtTime(60, now + 0.85);
-
-            gain.gain.setValueAtTime(0.35, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.9);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
 
             osc.connect(gain);
             gain.connect(this.ctx.destination);
-
             osc.start(now);
-            osc.stop(now + 0.95);
-          } catch (e) {}
-        }
-
-        playStart() {
-          if (this.muted) return;
-          this.init();
-          if (!this.ctx) return;
-          try {
-            const notes = [
-              { f: 493.88, d: 0.1 }, // B4
-              { f: 987.77, d: 0.1 }, // B5
-              { f: 739.99, d: 0.1 }, // F#5
-              { f: 622.25, d: 0.1 }, // D#5
-              { f: 987.77, d: 0.1 }, // B5
-              { f: 739.99, d: 0.15 } // F#5
-            ];
-            let t = this.ctx.currentTime;
-            notes.forEach(n => {
-              const osc = this.ctx.createOscillator();
-              const gain = this.ctx.createGain();
-              osc.type = 'triangle';
-              osc.frequency.setValueAtTime(n.f, t);
-              gain.gain.setValueAtTime(0.2, t);
-              gain.gain.exponentialRampToValueAtTime(0.01, t + n.d);
-              osc.connect(gain);
-              gain.connect(this.ctx.destination);
-              osc.start(t);
-              osc.stop(t + n.d);
-              t += n.d;
-            });
-          } catch (e) {}
-        }
-
-        playVictory() {
-          if (this.muted) return;
-          this.init();
-          if (!this.ctx) return;
-          try {
-            const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
-            let t = this.ctx.currentTime;
-            notes.forEach((f, idx) => {
-              const osc = this.ctx.createOscillator();
-              const gain = this.ctx.createGain();
-              osc.type = 'triangle';
-              osc.frequency.setValueAtTime(f, t);
-              gain.gain.setValueAtTime(0.22, t);
-              gain.gain.exponentialRampToValueAtTime(0.01, t + 0.18);
-              osc.connect(gain);
-              gain.connect(this.ctx.destination);
-              osc.start(t);
-              osc.stop(t + 0.2);
-              t += 0.15;
-            });
+            osc.stop(now + 0.16);
           } catch (e) {}
         }
 
@@ -447,47 +362,7 @@
         }
       }
 
-      // --- MAZE GRID DEFINITION (21 Cols x 22 Rows) ---
-      // 0: Empty path / corridor (no dot, e.g. ghost house tunnel)
-      // 1: Wall
-      // 2: Small Dot (10 pts)
-      // 3: Power Pellet (50 pts, energizer)
-      // 4: Ghost House Door (ghosts pass, player blocked)
-      // 5: Ghost House Interior
-      const INITIAL_MAZE = [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1],
-        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-        [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 4, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0, 2, 0, 0, 1, 5, 5, 5, 1, 0, 0, 2, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-        [1, 3, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 3, 1],
-        [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
-        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-      ];
-
-      const COLS = 21;
-      const ROWS = 22;
-      const CELL_SIZE = 20;
-      const HUD_TOP = 40;
-      const HUD_BOTTOM = 30;
-      const CANVAS_WIDTH = COLS * CELL_SIZE; // 420
-      const CANVAS_HEIGHT = HUD_TOP + (ROWS * CELL_SIZE) + HUD_BOTTOM; // 510
-
-      // DOM Elements
+      // --- GAME ENGINE ---
       const canvas = document.getElementById('gameCanvas');
       const ctx = canvas.getContext('2d');
       const container = document.getElementById('canvasContainer');
@@ -495,7 +370,6 @@
       const soundIcon = document.getElementById('soundIcon');
       const soundLabel = document.getElementById('soundLabel');
       const bezelHighScore = document.getElementById('bezelHighScore');
-      const dpadContainer = document.getElementById('dpadContainer');
 
       const sfx = new SoundFX();
 
@@ -508,11 +382,17 @@
         soundBtn.style.opacity = isMuted ? '0.6' : '1';
       });
 
-      // High-DPI Canvas scaling
+      // Virtual Canvas Dimensions
+      const V_WIDTH = 400;
+      const V_HEIGHT = 600;
+      const GROUND_HEIGHT = 90;
+      const GROUND_Y = V_HEIGHT - GROUND_HEIGHT; // 510
+
+      // High-DPI support
       function resizeCanvas() {
         const dpr = window.devicePixelRatio || 1;
-        canvas.width = CANVAS_WIDTH * dpr;
-        canvas.height = CANVAS_HEIGHT * dpr;
+        canvas.width = V_WIDTH * dpr;
+        canvas.height = V_HEIGHT * dpr;
         ctx.resetTransform();
         ctx.scale(dpr, dpr);
       }
@@ -520,7 +400,7 @@
       window.addEventListener('resize', resizeCanvas);
 
       // Local Storage High Score
-      const HIGH_SCORE_KEY = 'pacman_arcade_highscore';
+      const HIGH_SCORE_KEY = 'flappy_bird_arcade_highscore';
       let highScore = 0;
       try {
         const saved = localStorage.getItem(HIGH_SCORE_KEY);
@@ -545,962 +425,903 @@
       // Game States
       const STATE_START = 'START';
       const STATE_PLAYING = 'PLAYING';
-      const STATE_DYING = 'DYING';
       const STATE_GAMEOVER = 'GAMEOVER';
-      const STATE_VICTORY = 'VICTORY';
 
       let gameState = STATE_START;
       let score = 0;
-      let lives = 3;
-      let level = 1;
       let frames = 0;
-      let dotsTotal = 0;
-      let dotsRemaining = 0;
-      let ghostFrightenedTimer = 0;
-      const FRIGHTENED_DURATION = 480; // 8 seconds at 60fps
-      let ghostMultiplier = 200; // Multiplier for eating consecutive ghosts
-      let deathAnimFrame = 0;
-      let victoryTimer = 0;
+      let isNewHighScore = false;
 
-      // Directions
-      const DIRS = {
-        NONE: { dx: 0, dy: 0, angle: 0 },
-        RIGHT: { dx: 1, dy: 0, angle: 0 },
-        DOWN: { dx: 0, dy: 1, angle: Math.PI * 0.5 },
-        LEFT: { dx: -1, dy: 0, angle: Math.PI },
-        UP: { dx: 0, dy: -1, angle: Math.PI * 1.5 }
-      };
+      // Parallax Background offsets
+      let bgCityOffset = 0;
+      let bgGroundOffset = 0;
 
-      // Current mutable maze grid
-      let maze = [];
+      // Screen Shake
+      let shakeTime = 0;
+      let shakeIntensity = 0;
 
-      function cloneMaze() {
-        dotsTotal = 0;
-        maze = INITIAL_MAZE.map((row, r) => 
-          row.map((cell, c) => {
-            if (cell === 2 || cell === 3) dotsTotal++;
-            return cell;
-          })
-        );
-        dotsRemaining = dotsTotal;
+      function triggerShake(intensity = 6, duration = 12) {
+        shakeIntensity = intensity;
+        shakeTime = duration;
       }
 
-      // Floating Score Texts (e.g. +200, +400 when eating ghosts)
-      const floatingScores = [];
-      function addFloatingScore(x, y, pts) {
-        floatingScores.push({
+      // Particle System
+      const particles = [];
+      function addParticles(x, y, count = 8, color = '#facc15', sizeRange = [2, 5], speedRange = [1, 4]) {
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = speedRange[0] + Math.random() * (speedRange[1] - speedRange[0]);
+          particles.push({
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            color,
+            radius: sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]),
+            life: 1.0,
+            decay: 0.02 + Math.random() * 0.03
+          });
+        }
+      }
+
+      // Floating Score Texts
+      const floatingTexts = [];
+      function addFloatingText(x, y, text, color = '#ffffff') {
+        floatingTexts.push({
           x,
           y,
-          text: pts.toString(),
-          life: 45
+          text,
+          color,
+          alpha: 1.0,
+          vy: -1.2
         });
       }
 
-      // Helper: Check walkable cell for Player (blocks 1: wall, 4: door, 5: house)
-      function isPlayerWalkable(c, r) {
-        if (r === 10 && (c < 0 || c >= COLS)) return true; // Warp tunnel
-        if (r < 0 || r >= ROWS || c < 0 || c >= COLS) return false;
-        const tile = maze[r][c];
-        return tile !== 1 && tile !== 4 && tile !== 5;
+      // --- PROCEDURAL CLOUDS ---
+      const clouds = [
+        { x: 30, y: 70, scale: 0.9, speed: 0.25 },
+        { x: 220, y: 110, scale: 1.1, speed: 0.3 },
+        { x: 340, y: 55, scale: 0.75, speed: 0.22 },
+        { x: 140, y: 150, scale: 0.85, speed: 0.28 }
+      ];
+
+      // --- PROCEDURAL SKYLINE BUILDINGS ---
+      const skylineBuildings = [];
+      let totalSkylineWidth = 0;
+      while (totalSkylineWidth < V_WIDTH * 2) {
+        const bWidth = 24 + Math.floor(Math.random() * 28);
+        const bHeight = 35 + Math.floor(Math.random() * 45);
+        skylineBuildings.push({ width: bWidth, height: bHeight });
+        totalSkylineWidth += bWidth;
       }
 
-      // Helper: Check walkable cell for Ghost
-      function isGhostWalkable(c, r, isEaten = false, isHouseGhost = false) {
-        if (r === 10 && (c < 0 || c >= COLS)) return true; // Warp tunnel
-        if (r < 0 || r >= ROWS || c < 0 || c >= COLS) return false;
-        const tile = maze[r][c];
-        if (tile === 1) return false; // Wall
-        if (tile === 4) return isEaten || isHouseGhost; // Only eaten or house-exiting ghosts pass door
-        if (tile === 5) return isEaten || isHouseGhost;
-        return true;
-      }
+      // --- BIRD OBJECT ---
+      const bird = {
+        x: 95,
+        y: 250,
+        radius: 13,
+        velocity: 0,
+        gravity: 0.36,
+        jumpPower: -6.8,
+        rotation: 0,
+        wingPhase: 0,
+        isFlapping: false,
 
-      // --- PAC-MAN PLAYER ---
-      const player = {
-        x: 10 * CELL_SIZE + CELL_SIZE / 2,
-        y: 16 * CELL_SIZE + CELL_SIZE / 2,
-        speed: 2.0,
-        dir: DIRS.NONE,
-        nextDir: DIRS.NONE,
-        mouthAngle: 0.2,
-        mouthSpeed: 0.025,
-        mouthDir: 1,
+        reset() {
+          this.x = 95;
+          this.y = 250;
+          this.velocity = 0;
+          this.rotation = 0;
+          this.wingPhase = 0;
+          this.isFlapping = false;
+        },
 
-        resetPosition() {
-          this.x = 10 * CELL_SIZE + CELL_SIZE / 2;
-          this.y = 16 * CELL_SIZE + CELL_SIZE / 2;
-          this.dir = DIRS.NONE;
-          this.nextDir = DIRS.NONE;
-          this.mouthAngle = 0.2;
+        flap() {
+          this.velocity = this.jumpPower;
+          this.isFlapping = true;
+          sfx.playFlap();
+          // Burst feather puffs behind bird
+          addParticles(this.x - 12, this.y + 4, 3, '#ffffff', [1.5, 3], [0.5, 1.5]);
         },
 
         update() {
-          // Input buffering: try to turn into nextDir
-          if (this.nextDir !== this.dir) {
-            // Reversing 180 degrees immediately allowed anywhere
-            if (this.nextDir.dx === -this.dir.dx && this.nextDir.dy === -this.dir.dy) {
-              this.dir = this.nextDir;
-            } else {
-              // Turning perpendicular: check if close to center of current tile
-              const curCol = Math.floor(this.x / CELL_SIZE);
-              const curRow = Math.floor(this.y / CELL_SIZE);
-              const tileCenterX = curCol * CELL_SIZE + CELL_SIZE / 2;
-              const tileCenterY = curRow * CELL_SIZE + CELL_SIZE / 2;
-
-              if (Math.abs(this.x - tileCenterX) <= 3 && Math.abs(this.y - tileCenterY) <= 3) {
-                const targetCol = curCol + this.nextDir.dx;
-                const targetRow = curRow + this.nextDir.dy;
-                if (isPlayerWalkable(targetCol, targetRow)) {
-                  this.x = tileCenterX;
-                  this.y = tileCenterY;
-                  this.dir = this.nextDir;
-                }
-              }
-            }
+          if (gameState === STATE_START) {
+            // Idle bobbing
+            this.wingPhase += 0.15;
+            this.y = 250 + Math.sin(frames * 0.06) * 7;
+            this.rotation = 0;
+            return;
           }
 
-          // Move in current direction
-          if (this.dir !== DIRS.NONE) {
-            const nextX = this.x + this.dir.dx * this.speed;
-            const nextY = this.y + this.dir.dy * this.speed;
+          // Active physics
+          this.velocity += this.gravity;
+          this.y += this.velocity;
 
-            // Check tile ahead
-            const checkCol = Math.floor((nextX + this.dir.dx * (CELL_SIZE / 2 - 1)) / CELL_SIZE);
-            const checkRow = Math.floor((nextY + this.dir.dy * (CELL_SIZE / 2 - 1)) / CELL_SIZE);
+          // Rotation interpolation: pitches up on flap (-25deg), tilts down as it drops (+75deg)
+          if (this.velocity < 0) {
+            this.rotation = Math.max(-0.45, this.velocity * 0.08);
+          } else {
+            this.rotation = Math.min(Math.PI / 2.2, this.rotation + 0.045);
+          }
 
-            if (isPlayerWalkable(checkCol, checkRow)) {
-              this.x = nextX;
-              this.y = nextY;
+          // Wing flapping oscillation speed tied to state
+          if (this.velocity < 1) {
+            this.wingPhase += 0.35;
+          } else {
+            this.wingPhase += 0.1;
+          }
 
-              // Animate mouth
-              this.mouthAngle += this.mouthSpeed * this.mouthDir;
-              if (this.mouthAngle >= 0.28 || this.mouthAngle <= 0.04) {
-                this.mouthDir *= -1;
-              }
-            } else {
-              // Snap to center of current tile when stopped by wall
-              const curCol = Math.floor(this.x / CELL_SIZE);
-              const curRow = Math.floor(this.y / CELL_SIZE);
-              this.x = curCol * CELL_SIZE + CELL_SIZE / 2;
-              this.y = curRow * CELL_SIZE + CELL_SIZE / 2;
-              this.mouthAngle = 0.15;
-            }
+          // Ceiling check
+          if (this.y - this.radius < 0) {
+            this.y = this.radius;
+            this.velocity = 0;
+          }
 
-            // Warp Tunnel handling (Row 10)
-            const curRow = Math.floor(this.y / CELL_SIZE);
-            if (curRow === 10) {
-              if (this.x < -CELL_SIZE / 2) {
-                this.x = CANVAS_WIDTH + CELL_SIZE / 2;
-              } else if (this.x > CANVAS_WIDTH + CELL_SIZE / 2) {
-                this.x = -CELL_SIZE / 2;
-              }
-            }
-
-            // Dot / Pellet Eating
-            const eatCol = Math.floor(this.x / CELL_SIZE);
-            const eatRow = Math.floor(this.y / CELL_SIZE);
-            if (eatRow >= 0 && eatRow < ROWS && eatCol >= 0 && eatCol < COLS) {
-              const tile = maze[eatRow][eatCol];
-              if (tile === 2) {
-                // Small Dot
-                maze[eatRow][eatCol] = 0;
-                score += 10;
-                dotsRemaining--;
-                sfx.playWaka();
-                updateHighScore(score);
-              } else if (tile === 3) {
-                // Power Pellet
-                maze[eatRow][eatCol] = 0;
-                score += 50;
-                dotsRemaining--;
-                ghostFrightenedTimer = FRIGHTENED_DURATION;
-                ghostMultiplier = 200;
-                sfx.playPowerPellet();
-                updateHighScore(score);
-                // Turn active ghosts frightened
-                ghosts.forEach(g => {
-                  if (g.state === 'NORMAL') {
-                    g.state = 'FRIGHTENED';
-                    // Reverse ghost direction
-                    g.dir = { dx: -g.dir.dx, dy: -g.dir.dy, angle: (g.dir.angle + Math.PI) % (Math.PI * 2) };
-                  }
-                });
-              }
-
-              // Check Victory (All dots cleared!)
-              if (dotsRemaining <= 0) {
-                triggerVictory();
-              }
-            }
+          // Ground collision
+          if (this.y + this.radius >= GROUND_Y) {
+            this.y = GROUND_Y - this.radius;
+            gameOver(true);
           }
         },
 
         draw() {
-          const drawY = HUD_TOP + this.y;
-
           ctx.save();
-          ctx.translate(this.x, drawY);
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rotation);
 
-          if (gameState === STATE_DYING) {
-            // Dying animation: mouth opens all the way to 360deg and shrinks
-            const maxFrames = 50;
-            const progress = Math.min(1, deathAnimFrame / maxFrames);
-            const openArc = Math.PI * progress;
-            const radius = Math.max(0, 9 * (1 - progress * 0.7));
-
-            if (radius > 0) {
-              ctx.fillStyle = '#facc15';
-              ctx.beginPath();
-              ctx.arc(0, 0, radius, openArc, Math.PI * 2 - openArc);
-              ctx.lineTo(0, 0);
-              ctx.closePath();
-              ctx.fill();
-            }
-            ctx.restore();
-            return;
-          }
-
-          ctx.rotate(this.dir.angle);
-
-          // Yellow Pac-Man Body
-          ctx.fillStyle = '#facc15';
+          // 1. Tail Feathers (behind body)
+          ctx.fillStyle = '#f59e0b';
           ctx.beginPath();
-          ctx.arc(0, 0, 9, this.mouthAngle * Math.PI, (2 - this.mouthAngle) * Math.PI);
-          ctx.lineTo(0, 0);
+          ctx.moveTo(-12, 0);
+          ctx.lineTo(-20, -5);
+          ctx.lineTo(-17, 0);
+          ctx.lineTo(-21, 5);
           ctx.closePath();
           ctx.fill();
+          ctx.strokeStyle = '#b45309';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
 
-          // Subtle glossy highlight
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+          // 2. Main Body (Chubby teardrop / oval)
+          const bodyGrad = ctx.createRadialGradient(-2, -3, 2, 0, 0, 16);
+          bodyGrad.addColorStop(0, '#fef08a');
+          bodyGrad.addColorStop(0.3, '#facc15');
+          bodyGrad.addColorStop(0.85, '#eab308');
+          bodyGrad.addColorStop(1, '#ca8a04');
+
+          ctx.fillStyle = bodyGrad;
           ctx.beginPath();
-          ctx.arc(-2, -3, 2.5, 0, Math.PI * 2);
+          ctx.ellipse(0, 0, 15, 13, 0, 0, Math.PI * 2);
           ctx.fill();
+
+          ctx.strokeStyle = '#854d0e';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          // 3. Belly highlight (pale cream patch)
+          ctx.fillStyle = '#fef9c3';
+          ctx.beginPath();
+          ctx.ellipse(-2, 4, 9, 6.5, -0.2, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 4. Cheek Blush
+          ctx.fillStyle = 'rgba(239, 68, 68, 0.4)';
+          ctx.beginPath();
+          ctx.arc(3, 3, 3.8, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 5. Beak (bright orange upper and lower mandible)
+          ctx.fillStyle = '#f97316';
+          ctx.beginPath();
+          ctx.moveTo(8, -1);
+          ctx.lineTo(19, 2);
+          ctx.lineTo(7, 7);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = '#c2410c';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+
+          // Mouth line
+          ctx.strokeStyle = '#9a3412';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(8, 2.5);
+          ctx.lineTo(17, 2.5);
+          ctx.stroke();
+
+          // 6. Eye (Classic large cartoon eye)
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.ellipse(6, -4, 5.5, 6.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#1e293b';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+
+          // Pupil
+          ctx.fillStyle = '#0f172a';
+          ctx.beginPath();
+          ctx.arc(8, -4, 2.6, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Specular Catchlight
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(7.2, -5.5, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 7. Wing (Animated Flap with feather details)
+          const wingOffset = Math.sin(this.wingPhase) * 5;
+          ctx.save();
+          ctx.translate(-4, 0);
+
+          ctx.fillStyle = '#fde047';
+          ctx.beginPath();
+          ctx.ellipse(-2, wingOffset, 7.5, 4.5, -0.2 + wingOffset * 0.05, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#ca8a04';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+
+          // Inner wing feather lines
+          ctx.strokeStyle = '#eab308';
+          ctx.beginPath();
+          ctx.moveTo(-5, wingOffset);
+          ctx.lineTo(1, wingOffset);
+          ctx.stroke();
+          ctx.restore();
 
           ctx.restore();
         }
       };
 
-      // --- GHOST SYSTEM ---
-      class Ghost {
-        constructor(name, color, startCol, startRow, scatterCol, scatterRow, houseExitDelay) {
-          this.name = name;
-          this.color = color;
-          this.startCol = startCol;
-          this.startRow = startRow;
-          this.scatterCol = scatterCol;
-          this.scatterRow = scatterRow;
-          this.houseExitDelay = houseExitDelay; // Delay in frames before exiting house
+      // --- OBSTACLE SYSTEM (Pipes) ---
+      class PipePair {
+        constructor(x) {
+          this.x = x;
+          this.width = 62;
+          this.gap = 135; // Fair and responsive gap
+          this.rimHeight = 24;
+          this.rimOverhang = 4;
+          this.speed = 2.1;
+          this.passed = false;
 
-          this.x = startCol * CELL_SIZE + CELL_SIZE / 2;
-          this.y = startRow * CELL_SIZE + CELL_SIZE / 2;
-          this.dir = DIRS.UP;
-          this.state = 'IN_HOUSE'; // 'IN_HOUSE' | 'NORMAL' | 'FRIGHTENED' | 'EATEN'
-          this.speed = 1.9;
-          this.houseTimer = 0;
-          this.skirtFrame = 0;
-        }
-
-        reset() {
-          this.x = this.startCol * CELL_SIZE + CELL_SIZE / 2;
-          this.y = this.startRow * CELL_SIZE + CELL_SIZE / 2;
-          this.dir = DIRS.UP;
-          this.state = this.houseExitDelay === 0 ? 'NORMAL' : 'IN_HOUSE';
-          this.houseTimer = 0;
-          this.speed = 1.9;
+          // Gap position: top pipe bottom Y
+          const minTop = 65;
+          const maxTop = GROUND_Y - this.gap - 65;
+          this.top = Math.floor(minTop + Math.random() * (maxTop - minTop));
+          this.bottom = this.top + this.gap;
         }
 
         update() {
-          this.skirtFrame += 0.2;
-
-          // 1. Ghost inside house behavior
-          if (this.state === 'IN_HOUSE') {
-            this.houseTimer++;
-            // Gentle bobbing up and down
-            const baseY = this.startRow * CELL_SIZE + CELL_SIZE / 2;
-            this.y = baseY + Math.sin(this.houseTimer * 0.1) * 4;
-
-            if (this.houseTimer >= this.houseExitDelay) {
-              // Move towards center door col 10, then exit through door at row 9
-              const targetX = 10 * CELL_SIZE + CELL_SIZE / 2;
-              if (Math.abs(this.x - targetX) > 1.5) {
-                this.x += Math.sign(targetX - this.x) * 1.2;
-              } else {
-                this.x = targetX;
-                // Move UP through the door to row 8
-                this.y -= 1.5;
-                if (this.y <= 8 * CELL_SIZE + CELL_SIZE / 2) {
-                  this.y = 8 * CELL_SIZE + CELL_SIZE / 2;
-                  this.state = 'NORMAL';
-                  this.dir = DIRS.LEFT;
-                }
-              }
-            }
-            return;
-          }
-
-          // Adjust speed by state
-          let curSpeed = this.speed;
-          if (this.state === 'FRIGHTENED') {
-            curSpeed = 1.15;
-          } else if (this.state === 'EATEN') {
-            curSpeed = 3.6; // High speed returning eyes
-          }
-
-          // Move ghost
-          this.x += this.dir.dx * curSpeed;
-          this.y += this.dir.dy * curSpeed;
-
-          // Warp Tunnel (Row 10)
-          const curRow = Math.floor(this.y / CELL_SIZE);
-          if (curRow === 10) {
-            if (this.x < -CELL_SIZE / 2) {
-              this.x = CANVAS_WIDTH + CELL_SIZE / 2;
-            } else if (this.x > CANVAS_WIDTH + CELL_SIZE / 2) {
-              this.x = -CELL_SIZE / 2;
-            }
-          }
-
-          // Intersection Decision Logic: Check if ghost reached tile center
-          const curCol = Math.floor(this.x / CELL_SIZE);
-          const tileCenterX = curCol * CELL_SIZE + CELL_SIZE / 2;
-          const tileCenterY = curRow * CELL_SIZE + CELL_SIZE / 2;
-
-          if (Math.abs(this.x - tileCenterX) < curSpeed && Math.abs(this.y - tileCenterY) < curSpeed) {
-            this.x = tileCenterX;
-            this.y = tileCenterY;
-
-            // If EATEN and reached door (10, 8) or inside house (10, 10): respawn!
-            if (this.state === 'EATEN') {
-              if (curCol === 10 && (curRow === 8 || curRow === 9 || curRow === 10)) {
-                this.state = 'NORMAL';
-                this.y = 8 * CELL_SIZE + CELL_SIZE / 2;
-                this.dir = DIRS.LEFT;
-                return;
-              }
-            }
-
-            // Find all valid non-reverse directions
-            const validDirs = [];
-            const opposite = { dx: -this.dir.dx, dy: -this.dir.dy };
-            const candidateDirs = [DIRS.UP, DIRS.LEFT, DIRS.DOWN, DIRS.RIGHT];
-
-            candidateDirs.forEach(d => {
-              // Cannot reverse 180deg under normal or eaten flow
-              if (d.dx === opposite.dx && d.dy === opposite.dy) return;
-              const nextC = curCol + d.dx;
-              const nextR = curRow + d.dy;
-              if (isGhostWalkable(nextC, nextR, this.state === 'EATEN', false)) {
-                validDirs.push(d);
-              }
-            });
-
-            // If trapped (dead end), allow reversing
-            if (validDirs.length === 0) {
-              validDirs.push({ dx: opposite.dx, dy: opposite.dy, angle: (this.dir.angle + Math.PI) % (Math.PI * 2) });
-            }
-
-            // Choose direction based on AI target
-            if (this.state === 'FRIGHTENED') {
-              // Random walk when scared
-              const chosen = validDirs[Math.floor(Math.random() * validDirs.length)];
-              this.dir = chosen;
-            } else {
-              // Calculate target tile
-              const target = this.getTargetTile();
-              let bestDir = validDirs[0];
-              let bestDist = Infinity;
-
-              validDirs.forEach(d => {
-                const nextC = curCol + d.dx;
-                const nextR = curRow + d.dy;
-                const distSq = (nextC - target.c) ** 2 + (nextR - target.r) ** 2;
-                if (distSq < bestDist) {
-                  bestDist = distSq;
-                  bestDir = d;
-                }
-              });
-
-              this.dir = bestDir;
-            }
-          }
-        }
-
-        getTargetTile() {
-          // When EATEN: return to ghost house door
-          if (this.state === 'EATEN') {
-            return { c: 10, r: 8 };
-          }
-
-          const playerCol = Math.floor(player.x / CELL_SIZE);
-          const playerRow = Math.floor(player.y / CELL_SIZE);
-
-          switch (this.name) {
-            case 'Blinky': // Aggressive direct chaser (Red)
-              return { c: playerCol, r: playerRow };
-
-            case 'Pinky': // Ambusher: 4 tiles ahead of player (Pink)
-              return {
-                c: playerCol + player.dir.dx * 4,
-                r: playerRow + player.dir.dy * 4
-              };
-
-            case 'Inky': // Flanker: Vector between Blinky and player (Cyan)
-              const blinky = ghosts[0];
-              const bCol = Math.floor(blinky.x / CELL_SIZE);
-              const bRow = Math.floor(blinky.y / CELL_SIZE);
-              const pivotC = playerCol + player.dir.dx * 2;
-              const pivotR = playerRow + player.dir.dy * 2;
-              return {
-                c: pivotC + (pivotC - bCol),
-                r: pivotR + (pivotR - bRow)
-              };
-
-            case 'Clyde': // Coward: Chases if far, runs to corner if close (Orange)
-              const distToPlayer = Math.hypot(this.x - player.x, this.y - player.y) / CELL_SIZE;
-              if (distToPlayer > 7) {
-                return { c: playerCol, r: playerRow };
-              } else {
-                return { c: this.scatterCol, r: this.scatterRow };
-              }
-
-            default:
-              return { c: playerCol, r: playerRow };
-          }
+          this.x -= this.speed;
         }
 
         draw() {
-          const drawY = HUD_TOP + this.y;
+          const w = this.width;
+          const rimH = this.rimHeight;
+          const over = this.rimOverhang;
 
-          ctx.save();
-          ctx.translate(this.x, drawY);
+          // Helper: Draw Pipe Cylinder & Rim
+          const drawPipeCylinder = (px, py, pw, ph, isTopPipe) => {
+            // Main stem gradient
+            const stemGrad = ctx.createLinearGradient(px, 0, px + pw, 0);
+            stemGrad.addColorStop(0, '#5bb12f');
+            stemGrad.addColorStop(0.18, '#85e03b');
+            stemGrad.addColorStop(0.4, '#68c433');
+            stemGrad.addColorStop(0.75, '#479522');
+            stemGrad.addColorStop(1, '#2c6614');
 
-          // 1. EATEN STATE: Just floating eyes returning to base
-          if (this.state === 'EATEN') {
-            this.drawEyes();
-            ctx.restore();
-            return;
-          }
+            ctx.fillStyle = stemGrad;
+            ctx.fillRect(px, py, pw, ph);
 
-          // 2. FRIGHTENED / FLASHING COLOR
-          let bodyColor = this.color;
-          if (this.state === 'FRIGHTENED') {
-            // Flash between blue and white if < 160 frames (~2.5s) remaining
-            if (ghostFrightenedTimer < 160 && Math.floor(frames / 12) % 2 === 0) {
-              bodyColor = '#f1f5f9'; // Flash white
-            } else {
-              bodyColor = '#2563eb'; // Royal frightened blue
-            }
-          }
+            // Subtle highlight pin stripe
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.fillRect(px + 6, py, 3, ph);
 
-          // 3. Ghost Dome & Skirt Body
-          ctx.fillStyle = bodyColor;
-          ctx.beginPath();
-          // Dome
-          ctx.arc(0, -2, 9, Math.PI, 0, false);
-          // Right side
-          ctx.lineTo(9, 7);
-          // Wavy bottom skirt tentacles
-          const w = 18 / 3;
-          const wobble = Math.sin(this.skirtFrame) * 2;
-          ctx.lineTo(9 - w * 0.5, 5 + wobble);
-          ctx.lineTo(9 - w, 7);
-          ctx.lineTo(9 - w * 1.5, 5 - wobble);
-          ctx.lineTo(9 - w * 2, 7);
-          ctx.lineTo(9 - w * 2.5, 5 + wobble);
-          ctx.lineTo(-9, 7);
-          ctx.closePath();
-          ctx.fill();
+            // Deep shadow pinstripe
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(px + pw - 8, py, 5, ph);
 
-          // 4. Ghost Eyes & Mouth
-          if (this.state === 'FRIGHTENED') {
-            // Scared small round eyes
-            ctx.fillStyle = '#fed7aa';
-            ctx.fillRect(-4, -4, 2.5, 2.5);
-            ctx.fillRect(2, -4, 2.5, 2.5);
+            // Stem borders
+            ctx.strokeStyle = '#1b440c';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(px, py, pw, ph);
 
-            // Wavy scared mouth
-            ctx.strokeStyle = '#fed7aa';
-            ctx.lineWidth = 1.2;
-            ctx.beginPath();
-            ctx.moveTo(-5, 2);
-            ctx.lineTo(-3, 0);
-            ctx.lineTo(-1, 2);
-            ctx.lineTo(1, 0);
-            ctx.lineTo(3, 2);
-            ctx.lineTo(5, 0);
-            ctx.stroke();
-          } else {
-            this.drawEyes();
-          }
+            // Top / Bottom Rim Collar
+            const rimX = px - over;
+            const rimY = isTopPipe ? py + ph - rimH : py;
+            const rimW = pw + over * 2;
 
-          ctx.restore();
-        }
+            const rimGrad = ctx.createLinearGradient(rimX, 0, rimX + rimW, 0);
+            rimGrad.addColorStop(0, '#66c535');
+            rimGrad.addColorStop(0.2, '#92ec43');
+            rimGrad.addColorStop(0.45, '#72cf39');
+            rimGrad.addColorStop(0.8, '#4da024');
+            rimGrad.addColorStop(1, '#2c6614');
 
-        drawEyes() {
-          const eyeOffset = {
-            dx: this.dir.dx * 2,
-            dy: this.dir.dy * 2
+            ctx.fillStyle = rimGrad;
+            ctx.fillRect(rimX, rimY, rimW, rimH);
+
+            // Rim highlight line
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.fillRect(rimX + 8, rimY + 2, 4, rimH - 4);
+
+            // Dark inner lip shadow
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+            const lipY = isTopPipe ? rimY : rimY + rimH - 3;
+            ctx.fillRect(rimX + 2, lipY, rimW - 4, 3);
+
+            ctx.strokeStyle = '#1b440c';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(rimX, rimY, rimW, rimH);
           };
 
-          // White Eye Scleras
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.ellipse(-3.5, -3, 3, 4, 0, 0, Math.PI * 2);
-          ctx.ellipse(3.5, -3, 3, 4, 0, 0, Math.PI * 2);
-          ctx.fill();
+          // 1. Top Pipe (from y=0 to this.top)
+          drawPipeCylinder(this.x, 0, w, this.top, true);
 
-          // Blue Pupils looking in current direction
-          ctx.fillStyle = '#1e3a8a';
-          ctx.beginPath();
-          ctx.arc(-3.5 + eyeOffset.dx, -3 + eyeOffset.dy, 1.6, 0, Math.PI * 2);
-          ctx.arc(3.5 + eyeOffset.dx, -3 + eyeOffset.dy, 1.6, 0, Math.PI * 2);
-          ctx.fill();
+          // 2. Bottom Pipe (from this.bottom to GROUND_Y)
+          const bottomHeight = GROUND_Y - this.bottom;
+          drawPipeCylinder(this.x, this.bottom, w, bottomHeight, false);
+        }
+
+        // Precise Circle-vs-Rect Collision
+        checkCollision(circle) {
+          const cx = circle.x;
+          const cy = circle.y;
+          // Inset radius by 2px for fair arcade forgiveness
+          const r = circle.radius - 2;
+
+          const testAABB = (rx, ry, rw, rh) => {
+            const closestX = Math.max(rx, Math.min(cx, rx + rw));
+            const closestY = Math.max(ry, Math.min(cy, ry + rh));
+            const dx = cx - closestX;
+            const dy = cy - closestY;
+            return (dx * dx + dy * dy) <= (r * r);
+          };
+
+          const w = this.width;
+          const rimH = this.rimHeight;
+          const over = this.rimOverhang;
+
+          // Top pipe stem
+          if (testAABB(this.x, 0, w, this.top - rimH)) return true;
+          // Top pipe rim
+          if (testAABB(this.x - over, this.top - rimH, w + over * 2, rimH)) return true;
+
+          // Bottom pipe rim
+          if (testAABB(this.x - over, this.bottom, w + over * 2, rimH)) return true;
+          // Bottom pipe stem
+          if (testAABB(this.x, this.bottom + rimH, w, GROUND_Y - (this.bottom + rimH))) return true;
+
+          return false;
         }
       }
 
-      // Initialize 4 Ghosts
-      const ghosts = [
-        new Ghost('Blinky', '#ef4444', 10, 8, 19, 0, 0),    // Red: starts outside house
-        new Ghost('Pinky', '#f472b6', 9, 10, 1, 0, 80),      // Pink: exits after ~1.3s
-        new Ghost('Inky', '#06b6d4', 10, 10, 19, 21, 200),   // Cyan: exits after ~3.3s
-        new Ghost('Clyde', '#f97316', 11, 10, 1, 21, 360)    // Orange: exits after ~6s
-      ];
+      let pipes = [];
+      const PIPE_SPAWN_INTERVAL = 105;
 
-      // Reset Positions for round / death
-      function resetRoundPositions() {
-        player.resetPosition();
-        ghosts.forEach(g => g.reset());
+      function resetPipes() {
+        pipes = [];
       }
 
-      // --- GAME FLOW HELPERS ---
+      // --- GAME FLOW & STATE LOGIC ---
       function startGame() {
         sfx.init();
+        gameState = STATE_PLAYING;
         score = 0;
-        lives = 3;
-        level = 1;
-        cloneMaze();
-        resetRoundPositions();
-        gameState = STATE_PLAYING;
-        sfx.playStart();
+        isNewHighScore = false;
+        bird.reset();
+        bird.flap();
+        resetPipes();
+        pipes.push(new PipePair(V_WIDTH + 50));
       }
 
-      function triggerPlayerDeath() {
-        gameState = STATE_DYING;
-        deathAnimFrame = 0;
-        sfx.playDeath();
+      function gameOver(hitGround = false) {
+        if (gameState === STATE_GAMEOVER) return;
+
+        gameState = STATE_GAMEOVER;
+        triggerShake(8, 14);
+
+        if (hitGround) {
+          sfx.playHit();
+        } else {
+          sfx.playHit();
+          setTimeout(() => sfx.playDie(), 120);
+        }
+
+        isNewHighScore = updateHighScore(score);
+
+        // Burst feather particles
+        addParticles(bird.x, bird.y, 16, '#facc15', [2, 5], [2, 5]);
+        addParticles(bird.x, bird.y, 8, '#ffffff', [1.5, 4], [1, 3.5]);
       }
 
-      function triggerVictory() {
-        gameState = STATE_VICTORY;
-        victoryTimer = 0;
-        sfx.playVictory();
-      }
-
-      function nextLevel() {
-        level++;
-        cloneMaze();
-        resetRoundPositions();
-        gameState = STATE_PLAYING;
-        sfx.playStart();
-      }
-
-      // Action Handler (tap/space to start)
-      function handleAction(dirKey = null) {
+      function handleAction() {
         sfx.init();
-        if (gameState === STATE_START || gameState === STATE_GAMEOVER) {
+        if (gameState === STATE_START) {
           startGame();
-          return;
-        }
-
-        if (dirKey && gameState === STATE_PLAYING) {
-          player.nextDir = DIRS[dirKey];
+        } else if (gameState === STATE_PLAYING) {
+          bird.flap();
+        } else if (gameState === STATE_GAMEOVER) {
+          sfx.playSwoosh();
+          gameState = STATE_START;
+          bird.reset();
+          resetPipes();
         }
       }
 
-      // Controls Binding (Keyboard)
+      // Controls Binding
       window.addEventListener('keydown', (e) => {
-        const key = e.key;
-        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(key)) {
+        if (e.code === 'Space' || e.code === 'ArrowUp' || e.key === ' ') {
           e.preventDefault();
-        }
-
-        if (gameState === STATE_START || gameState === STATE_GAMEOVER) {
-          if (key === ' ' || key === 'Enter') {
-            handleAction();
-            return;
-          }
-        }
-
-        if (key === 'ArrowUp' || key === 'w' || key === 'W') {
-          player.nextDir = DIRS.UP;
-        } else if (key === 'ArrowDown' || key === 's' || key === 'S') {
-          player.nextDir = DIRS.DOWN;
-        } else if (key === 'ArrowLeft' || key === 'a' || key === 'A') {
-          player.nextDir = DIRS.LEFT;
-        } else if (key === 'ArrowRight' || key === 'd' || key === 'D') {
-          player.nextDir = DIRS.RIGHT;
-        }
-      });
-
-      // Virtual D-Pad Touch / Click
-      dpadContainer.querySelectorAll('.dpad-btn').forEach(btn => {
-        const dir = btn.dataset.dir;
-        const triggerDir = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          btn.classList.add('active');
-          handleAction(dir);
-        };
-        const releaseDir = () => btn.classList.remove('active');
-
-        btn.addEventListener('pointerdown', triggerDir);
-        btn.addEventListener('pointerup', releaseDir);
-        btn.addEventListener('pointerleave', releaseDir);
-      });
-
-      // Swipe Gesture Handling on Canvas
-      let touchStartX = 0;
-      let touchStartY = 0;
-
-      container.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (e.touches.length > 0) {
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-        }
-        if (gameState === STATE_START || gameState === STATE_GAMEOVER) {
-          handleAction();
-        }
-      }, { passive: false });
-
-      container.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (e.changedTouches.length > 0 && gameState === STATE_PLAYING) {
-          const dx = e.changedTouches[0].clientX - touchStartX;
-          const dy = e.changedTouches[0].clientY - touchStartY;
-          const absDx = Math.abs(dx);
-          const absDy = Math.abs(dy);
-
-          if (Math.max(absDx, absDy) > 20) {
-            if (absDx > absDy) {
-              player.nextDir = dx > 0 ? DIRS.RIGHT : DIRS.LEFT;
-            } else {
-              player.nextDir = dy > 0 ? DIRS.DOWN : DIRS.UP;
-            }
-          }
-        }
-      }, { passive: false });
-
-      container.addEventListener('click', () => {
-        if (gameState === STATE_START || gameState === STATE_GAMEOVER) {
           handleAction();
         }
       });
+
+      container.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        handleAction();
+      });
+
+      // Prevent gestures / pinch zooms on mobile
+      container.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
 
       // --- RENDERING ROUTINES ---
 
-      // 1. Draw Maze Walls and Pellets
-      function drawMaze() {
-        const pulse = Math.sin(frames * 0.1) * 1.5;
+      // 1. Parallax Sky & Cloud Rendering
+      function drawSky() {
+        // Vibrant arcade blue to soft aqua
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
+        skyGrad.addColorStop(0, '#3ba8e8');
+        skyGrad.addColorStop(0.5, '#56b8ee');
+        skyGrad.addColorStop(0.85, '#84d4f4');
+        skyGrad.addColorStop(1, '#c5ebf8');
+        ctx.fillStyle = skyGrad;
+        ctx.fillRect(0, 0, V_WIDTH, GROUND_Y);
 
-        for (let r = 0; r < ROWS; r++) {
-          for (let c = 0; c < COLS; c++) {
-            const tile = maze[r][c];
-            const x = c * CELL_SIZE;
-            const y = HUD_TOP + r * CELL_SIZE;
-
-            if (tile === 1) {
-              // Classic Neon Blue Arcade Wall
-              ctx.fillStyle = '#0f172a';
-              ctx.fillRect(x, y, CELL_SIZE, CELL_SIZE);
-
-              ctx.strokeStyle = '#2563eb';
-              ctx.lineWidth = 2.5;
-              ctx.strokeRect(x + 2, y + 2, CELL_SIZE - 4, CELL_SIZE - 4);
-
-              // Subtle inner neon glow line
-              ctx.strokeStyle = '#60a5fa';
-              ctx.lineWidth = 1;
-              ctx.strokeRect(x + 4, y + 4, CELL_SIZE - 8, CELL_SIZE - 8);
-            } else if (tile === 4) {
-              // Ghost House Door (Pink / White Hatch)
-              ctx.fillStyle = '#f472b6';
-              ctx.fillRect(x, y + CELL_SIZE / 2 - 2, CELL_SIZE, 4);
-            } else if (tile === 2) {
-              // Small Dot / Pellet
-              ctx.fillStyle = '#fbbf24';
-              ctx.beginPath();
-              ctx.arc(x + CELL_SIZE / 2, y + CELL_SIZE / 2, 2.5, 0, Math.PI * 2);
-              ctx.fill();
-            } else if (tile === 3) {
-              // Pulsating Power Pellet (Energizer)
-              const pRadius = Math.max(3, 6 + pulse);
-              ctx.fillStyle = '#fef08a';
-              ctx.beginPath();
-              ctx.arc(x + CELL_SIZE / 2, y + CELL_SIZE / 2, pRadius, 0, Math.PI * 2);
-              ctx.fill();
-
-              // Outer warm aura
-              ctx.fillStyle = 'rgba(245, 158, 11, 0.35)';
-              ctx.beginPath();
-              ctx.arc(x + CELL_SIZE / 2, y + CELL_SIZE / 2, pRadius + 3, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
+        // Distant hills / skyline
+        ctx.fillStyle = '#6cb79d';
+        ctx.beginPath();
+        ctx.moveTo(0, GROUND_Y);
+        for (let x = 0; x <= V_WIDTH; x += 40) {
+          const hillY = GROUND_Y - 50 + Math.sin((x + bgCityOffset) * 0.02) * 16;
+          ctx.lineTo(x, hillY);
         }
+        ctx.lineTo(V_WIDTH, GROUND_Y);
+        ctx.closePath();
+        ctx.fill();
+
+        // City silhouette (midground buildings)
+        ctx.fillStyle = '#559f84';
+        let curX = -(bgCityOffset % 120);
+        let idx = 0;
+        while (curX < V_WIDTH + 60) {
+          const b = skylineBuildings[idx % skylineBuildings.length];
+          ctx.fillRect(curX, GROUND_Y - b.height, b.width, b.height);
+          curX += b.width;
+          idx++;
+        }
+
+        // Procedural Clouds
+        clouds.forEach((c) => {
+          c.x -= c.speed;
+          if (c.x < -100) c.x = V_WIDTH + 50;
+
+          ctx.save();
+          ctx.translate(c.x, c.y);
+          ctx.scale(c.scale, c.scale);
+
+          // Cloud puff circles
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+          ctx.beginPath();
+          ctx.arc(0, 0, 22, 0, Math.PI * 2);
+          ctx.arc(20, -10, 26, 0, Math.PI * 2);
+          ctx.arc(48, -4, 20, 0, Math.PI * 2);
+          ctx.arc(65, 4, 16, 0, Math.PI * 2);
+          ctx.arc(28, 12, 18, 0, Math.PI * 2);
+          ctx.closePath();
+          ctx.fill();
+
+          // Subtle shading on cloud bottom
+          ctx.fillStyle = 'rgba(224, 242, 254, 0.6)';
+          ctx.beginPath();
+          ctx.arc(20, 10, 20, 0, Math.PI);
+          ctx.arc(45, 10, 16, 0, Math.PI);
+          ctx.fill();
+
+          ctx.restore();
+        });
       }
 
-      // 2. Draw Top & Bottom HUD
-      function drawHUD() {
-        ctx.save();
-        ctx.textAlign = 'left';
-        ctx.textBaseline = 'middle';
+      // 2. Moving Ground & Grass Strip
+      function drawGround() {
+        const gy = GROUND_Y;
+        const gh = GROUND_HEIGHT;
 
-        // Top HUD: Score & High Score
-        ctx.font = '700 11px monospace';
-        ctx.fillStyle = '#94a3b8';
-        ctx.fillText('1UP SCORE', 15, 14);
-        ctx.fillText('HIGH SCORE', 250, 14);
+        // Sand / Dirt Base
+        ctx.fillStyle = '#ded895';
+        ctx.fillRect(0, gy, V_WIDTH, gh);
 
-        ctx.font = '900 16px monospace';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText(score.toString().padStart(2, '0'), 15, 30);
-        ctx.fillText(highScore.toString().padStart(2, '0'), 250, 30);
-
-        // Bottom HUD: Lives & Level
-        const bottomY = CANVAS_HEIGHT - 16;
-        ctx.fillStyle = '#94a3b8';
-        ctx.font = '700 10px monospace';
-        ctx.fillText('LIVES:', 15, bottomY);
-
-        // Draw Pac-Man icons for remaining lives
-        for (let i = 0; i < lives - 1; i++) {
-          const iconX = 75 + i * 22;
-          ctx.fillStyle = '#facc15';
+        // Moving diagonal dirt texture
+        ctx.strokeStyle = '#cebe68';
+        ctx.lineWidth = 3;
+        const stripeGap = 18;
+        const offset = bgGroundOffset % stripeGap;
+        for (let x = -stripeGap; x < V_WIDTH + stripeGap * 2; x += stripeGap) {
           ctx.beginPath();
-          ctx.arc(iconX, bottomY, 7, 0.2 * Math.PI, 1.8 * Math.PI);
-          ctx.lineTo(iconX, bottomY);
+          ctx.moveTo(x - offset, gy + 18);
+          ctx.lineTo(x - offset - 10, gy + gh);
+          ctx.stroke();
+        }
+
+        // Top Grass Rim
+        const grassH = 16;
+        ctx.fillStyle = '#73bf2e';
+        ctx.fillRect(0, gy, V_WIDTH, grassH);
+
+        // Highlight stripe on grass
+        ctx.fillStyle = '#9ce659';
+        ctx.fillRect(0, gy, V_WIDTH, 4);
+
+        // Grass teeth / chevrons moving with ground
+        ctx.fillStyle = '#558022';
+        const toothW = 12;
+        const toothOffset = bgGroundOffset % (toothW * 2);
+        for (let x = -toothW * 2; x < V_WIDTH + toothW * 2; x += toothW * 2) {
+          ctx.beginPath();
+          ctx.moveTo(x - toothOffset, gy + grassH);
+          ctx.lineTo(x - toothOffset + toothW, gy + grassH + 4);
+          ctx.lineTo(x - toothOffset + toothW * 2, gy + grassH);
           ctx.closePath();
           ctx.fill();
         }
 
-        // Level fruit/badge
-        ctx.textAlign = 'right';
-        ctx.fillStyle = '#ef4444';
-        ctx.font = '900 12px monospace';
-        ctx.fillText(`LVL ${level} 🍒`, CANVAS_WIDTH - 15, bottomY);
+        // Ground upper divider border
+        ctx.strokeStyle = '#2b4710';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(0, gy);
+        ctx.lineTo(V_WIDTH, gy);
+        ctx.stroke();
+      }
 
+      // 3. Scoreboard / HUD Rendering
+      function drawScore() {
+        if (gameState !== STATE_PLAYING) return;
+
+        const scoreStr = score.toString();
+        ctx.save();
+        ctx.font = '900 38px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+
+        // Outer dark drop shadow
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 7;
+        ctx.strokeText(scoreStr, V_WIDTH / 2, 45);
+
+        // Inner clean fill
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(scoreStr, V_WIDTH / 2, 45);
         ctx.restore();
       }
 
-      // 3. Start Screen Overlay
+      // 4. Start Screen UI
       function drawStartScreen() {
         if (gameState !== STATE_START) return;
 
         ctx.save();
         ctx.textAlign = 'center';
 
-        // Dim background overlay
-        ctx.fillStyle = 'rgba(3, 4, 8, 0.75)';
-        ctx.fillRect(0, HUD_TOP, CANVAS_WIDTH, ROWS * CELL_SIZE);
+        // Flappy Bird Title Box
+        ctx.font = '900 32px monospace';
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 6;
+        ctx.strokeText('FLAPPY BIRD', V_WIDTH / 2, 130);
+        ctx.fillStyle = '#f59e0b';
+        ctx.fillText('FLAPPY BIRD', V_WIDTH / 2, 130);
 
-        // Title
-        ctx.font = '900 28px monospace';
-        ctx.fillStyle = '#facc15';
-        ctx.fillText('PAC-MAN', CANVAS_WIDTH / 2, 170);
-
-        // Ghost Parade Preview
-        const ghostColors = ['#ef4444', '#f472b6', '#06b6d4', '#f97316'];
-        ghostColors.forEach((color, idx) => {
-          const gx = CANVAS_WIDTH / 2 - 60 + idx * 40;
-          const gy = 220;
-          ctx.fillStyle = color;
-          ctx.beginPath();
-          ctx.arc(gx, gy, 11, Math.PI, 0);
-          ctx.lineTo(gx + 11, gy + 10);
-          ctx.lineTo(gx - 11, gy + 10);
-          ctx.closePath();
-          ctx.fill();
-          // Eyes
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(gx - 4, gy - 2, 3, 0, Math.PI * 2);
-          ctx.arc(gx + 4, gy - 2, 3, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        // Instructions Box
-        ctx.fillStyle = '#1e293b';
-        ctx.strokeStyle = '#38bdf8';
-        ctx.lineWidth = 2;
+        // Decorative instruction panel
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
         ctx.beginPath();
-        ctx.roundRect(CANVAS_WIDTH / 2 - 130, 275, 260, 110, 10);
+        ctx.roundRect(V_WIDTH / 2 - 130, 310, 260, 110, 12);
         ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        ctx.font = '800 13px monospace';
-        ctx.fillStyle = '#38bdf8';
-        ctx.fillText('HOW TO PLAY', CANVAS_WIDTH / 2, 305);
+        // Pulsing "TAP TO FLY" prompt
+        const pulse = Math.sin(frames * 0.08) * 0.2 + 0.8;
+        ctx.font = '700 15px monospace';
+        ctx.fillStyle = `rgba(255, 255, 255, ${pulse})`;
+        ctx.fillText('TAP OR PRESS SPACE', V_WIDTH / 2, 345);
+        ctx.fillText('TO FLAP & FLY', V_WIDTH / 2, 370);
 
-        ctx.font = '600 11px monospace';
-        ctx.fillStyle = '#e2e8f0';
-        ctx.fillText('Eat all dots & pellets.', CANVAS_WIDTH / 2, 330);
-        ctx.fillText('Chomp blue ghosts!', CANVAS_WIDTH / 2, 350);
-        ctx.fillText('Avoid colorful ghosts.', CANVAS_WIDTH / 2, 370);
-
-        // Pulsing Start Prompt
-        const pulse = Math.sin(frames * 0.1) * 0.2 + 0.8;
-        ctx.font = '900 14px monospace';
-        ctx.fillStyle = `rgba(250, 204, 21, ${pulse})`;
-        ctx.fillText('TAP OR PRESS SPACE', CANVAS_WIDTH / 2, 425);
-        ctx.fillText('TO START', CANVAS_WIDTH / 2, 448);
+        // Small key hints
+        ctx.font = '600 12px monospace';
+        ctx.fillStyle = '#fde047';
+        ctx.fillText(`BEST SCORE: ${highScore}`, V_WIDTH / 2, 400);
 
         ctx.restore();
       }
 
-      // 4. Game Over Overlay
+      // 5. Game Over Modal / Scoreboard
       function drawGameOverScreen() {
         if (gameState !== STATE_GAMEOVER) return;
 
         ctx.save();
         ctx.textAlign = 'center';
 
-        ctx.fillStyle = 'rgba(3, 4, 8, 0.8)';
-        ctx.fillRect(0, HUD_TOP, CANVAS_WIDTH, ROWS * CELL_SIZE);
-
-        ctx.font = '900 32px monospace';
+        // "GAME OVER" Text
+        ctx.font = '900 34px monospace';
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 6;
+        ctx.strokeText('GAME OVER', V_WIDTH / 2, 120);
         ctx.fillStyle = '#ef4444';
-        ctx.fillText('GAME OVER', CANVAS_WIDTH / 2, 210);
+        ctx.fillText('GAME OVER', V_WIDTH / 2, 120);
 
-        ctx.font = '800 16px monospace';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText(`FINAL SCORE: ${score}`, CANVAS_WIDTH / 2, 260);
-        ctx.fillText(`HIGH SCORE: ${highScore}`, CANVAS_WIDTH / 2, 290);
+        // Scoreboard Card
+        const cardX = 45;
+        const cardY = 170;
+        const cardW = 310;
+        const cardH = 195;
 
-        const pulse = Math.sin(frames * 0.1) * 0.2 + 0.8;
-        ctx.font = '900 14px monospace';
-        ctx.fillStyle = `rgba(250, 204, 21, ${pulse})`;
-        ctx.fillText('TAP TO PLAY AGAIN', CANVAS_WIDTH / 2, 360);
+        // Card background (Retro parchment style)
+        ctx.fillStyle = '#ded895';
+        ctx.strokeStyle = '#543847';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.roundRect(cardX, cardY, cardW, cardH, 12);
+        ctx.fill();
+        ctx.stroke();
 
-        ctx.restore();
-      }
+        // Inner inset border
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(cardX + 6, cardY + 6, cardW - 12, cardH - 12);
 
-      // 5. Victory / Level Cleared Overlay
-      function drawVictoryScreen() {
-        if (gameState !== STATE_VICTORY) return;
+        // Medal Box (Left side of card)
+        const medalBoxX = cardX + 24;
+        const medalBoxY = cardY + 45;
+        const medalBoxSize = 75;
 
-        ctx.save();
-        ctx.textAlign = 'center';
+        ctx.fillStyle = '#c8bc6d';
+        ctx.strokeStyle = '#856a29';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(medalBoxX, medalBoxY, medalBoxSize, medalBoxSize, 8);
+        ctx.fill();
+        ctx.stroke();
 
-        ctx.fillStyle = 'rgba(3, 4, 8, 0.75)';
-        ctx.fillRect(0, HUD_TOP, CANVAS_WIDTH, ROWS * CELL_SIZE);
+        ctx.font = '800 11px monospace';
+        ctx.fillStyle = '#543847';
+        ctx.fillText('MEDAL', medalBoxX + medalBoxSize / 2, medalBoxY - 12);
 
-        ctx.font = '900 28px monospace';
+        // Draw Medal tiers
+        let medalColor = null;
+        let medalBorder = null;
+
+        if (score >= 40) {
+          medalColor = '#e2e8f0'; // Platinum
+          medalBorder = '#94a3b8';
+        } else if (score >= 25) {
+          medalColor = '#fbbf24'; // Gold
+          medalBorder = '#d97706';
+        } else if (score >= 15) {
+          medalColor = '#cbd5e1'; // Silver
+          medalBorder = '#64748b';
+        } else if (score >= 5) {
+          medalColor = '#d97706'; // Bronze
+          medalBorder = '#92400e';
+        }
+
+        if (medalColor) {
+          const mx = medalBoxX + medalBoxSize / 2;
+          const my = medalBoxY + medalBoxSize / 2;
+
+          ctx.fillStyle = medalColor;
+          ctx.beginPath();
+          ctx.arc(mx, my, 22, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = medalBorder;
+          ctx.lineWidth = 3;
+          ctx.stroke();
+
+          ctx.fillStyle = medalBorder;
+          ctx.font = '900 16px sans-serif';
+          ctx.fillText('★', mx, my + 6);
+        } else {
+          ctx.font = '700 11px monospace';
+          ctx.fillStyle = '#856a29';
+          ctx.fillText('NONE', medalBoxX + medalBoxSize / 2, medalBoxY + 42);
+        }
+
+        // Score & Best Labels (Right side of card)
+        const statsX = cardX + 215;
+
+        ctx.font = '800 12px monospace';
+        ctx.fillStyle = '#e86100';
+        ctx.fillText('SCORE', statsX, cardY + 45);
+
+        ctx.font = '900 26px monospace';
+        ctx.fillStyle = '#1e293b';
+        ctx.fillText(score.toString(), statsX, cardY + 75);
+
+        ctx.font = '800 12px monospace';
+        ctx.fillStyle = '#e86100';
+        ctx.fillText('BEST', statsX, cardY + 115);
+
+        ctx.font = '900 26px monospace';
+        ctx.fillStyle = '#1e293b';
+        ctx.fillText(highScore.toString(), statsX, cardY + 145);
+
+        // "NEW" High Score Ribbon
+        if (isNewHighScore) {
+          ctx.fillStyle = '#ef4444';
+          ctx.beginPath();
+          ctx.roundRect(statsX + 28, cardY + 98, 40, 18, 4);
+          ctx.fill();
+          ctx.font = '900 10px monospace';
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText('NEW', statsX + 48, cardY + 111);
+        }
+
+        // Restart Action Button / Prompt
+        const btnY = cardY + cardH + 30;
+        const btnW = 200;
+        const btnH = 46;
+        const btnX = V_WIDTH / 2 - btnW / 2;
+
+        const pulse = Math.sin(frames * 0.1) * 0.15 + 0.85;
+
         ctx.fillStyle = '#22c55e';
-        ctx.fillText('STAGE CLEARED!', CANVAS_WIDTH / 2, 230);
+        ctx.strokeStyle = '#15803d';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.roundRect(btnX, btnY, btnW, btnH, 8);
+        ctx.fill();
+        ctx.stroke();
 
-        ctx.font = '800 14px monospace';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.fillRect(btnX + 3, btnY + 3, btnW - 6, 4);
+
+        ctx.font = '900 15px monospace';
         ctx.fillStyle = '#ffffff';
-        ctx.fillText('GET READY FOR NEXT LEVEL', CANVAS_WIDTH / 2, 275);
+        ctx.fillText('PLAY AGAIN', V_WIDTH / 2, btnY + 28);
+
+        ctx.font = '600 11px monospace';
+        ctx.fillStyle = `rgba(255, 255, 255, ${pulse})`;
+        ctx.fillText('Press SPACE or TAP', V_WIDTH / 2, btnY + 70);
 
         ctx.restore();
       }
 
       // --- MAIN GAME LOOP (60fps) ---
-      function gameLoop() {
+      let lastTime = performance.now();
+
+      function gameLoop(time) {
         requestAnimationFrame(gameLoop);
         frames++;
 
-        // Clear canvas
-        ctx.fillStyle = '#030408';
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        const dt = Math.min((time - lastTime) / 1000, 0.1);
+        lastTime = time;
 
-        // 1. Draw static maze
-        drawMaze();
+        // Screen Shake calculation
+        let offsetX = 0;
+        let offsetY = 0;
+        if (shakeTime > 0) {
+          shakeTime--;
+          offsetX = (Math.random() - 0.5) * shakeIntensity;
+          offsetY = (Math.random() - 0.5) * shakeIntensity;
+        }
 
-        // 2. Active Game Updates
+        // Apply screen shake transform
+        ctx.save();
+        ctx.translate(offsetX, offsetY);
+
+        // Update Parallax Offsets
+        if (gameState === STATE_PLAYING || gameState === STATE_START) {
+          bgCityOffset += 0.4;
+          bgGroundOffset += 2.1;
+        }
+
+        // Clear canvas & draw background
+        drawSky();
+
+        // Update & Draw Obstacles
         if (gameState === STATE_PLAYING) {
-          player.update();
-
-          // Frightened Timer Countdown
-          if (ghostFrightenedTimer > 0) {
-            ghostFrightenedTimer--;
-            if (ghostFrightenedTimer === 0) {
-              ghosts.forEach(g => {
-                if (g.state === 'FRIGHTENED') g.state = 'NORMAL';
-              });
-            }
+          if (pipes.length === 0 || pipes[pipes.length - 1].x < V_WIDTH - PIPE_SPAWN_INTERVAL * 1.8) {
+            pipes.push(new PipePair(V_WIDTH + 20));
           }
 
-          // Update Ghosts & Check Collisions
-          ghosts.forEach(g => {
-            g.update();
+          for (let i = pipes.length - 1; i >= 0; i--) {
+            const p = pipes[i];
+            p.update();
+            p.draw();
 
-            // Collision check with Player
-            const dist = Math.hypot(player.x - g.x, player.y - g.y);
-            if (dist < 13) {
-              if (g.state === 'FRIGHTENED') {
-                // Eat ghost!
-                g.state = 'EATEN';
-                score += ghostMultiplier;
-                addFloatingScore(g.x, HUD_TOP + g.y, ghostMultiplier);
-                sfx.playEatGhost();
-                updateHighScore(score);
-                ghostMultiplier *= 2; // Consecutive bonus: 200 -> 400 -> 800 -> 1600
-              } else if (g.state === 'NORMAL') {
-                // Player dies!
-                triggerPlayerDeath();
-              }
+            // Check Score passage
+            if (!p.passed && p.x + p.width < bird.x) {
+              p.passed = true;
+              score++;
+              sfx.playScore();
+              addFloatingText(bird.x + 8, bird.y - 18, '+1', '#22c55e');
             }
-          });
-        } else if (gameState === STATE_DYING) {
-          deathAnimFrame++;
-          if (deathAnimFrame > 55) {
-            lives--;
-            if (lives > 0) {
-              resetRoundPositions();
-              gameState = STATE_PLAYING;
-            } else {
-              gameState = STATE_GAMEOVER;
-              updateHighScore(score);
+
+            // Check Collision
+            if (p.checkCollision(bird)) {
+              gameOver(false);
+            }
+
+            // Remove off-screen pipes
+            if (p.x + p.width + 10 < 0) {
+              pipes.splice(i, 1);
             }
           }
-        } else if (gameState === STATE_VICTORY) {
-          victoryTimer++;
-          if (victoryTimer > 120) {
-            nextLevel();
+        } else {
+          pipes.forEach(p => p.draw());
+        }
+
+        // Ground layer (covers lower pipe rims)
+        drawGround();
+
+        // Update & Draw Bird
+        bird.update();
+        bird.draw();
+
+        // Update & Draw Particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const pt = particles[i];
+          pt.x += pt.vx;
+          pt.y += pt.vy;
+          pt.vy += 0.1;
+          pt.life -= pt.decay;
+
+          if (pt.life <= 0) {
+            particles.splice(i, 1);
+          } else {
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, pt.life);
+            ctx.fillStyle = pt.color;
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, pt.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
           }
         }
 
-        // 3. Draw Characters
-        player.draw();
-        ghosts.forEach(g => g.draw());
+        // Update & Draw Floating Scores
+        for (let i = floatingTexts.length - 1; i >= 0; i--) {
+          const ft = floatingTexts[i];
+          ft.y += ft.vy;
+          ft.alpha -= 0.025;
 
-        // 4. Draw Floating Score Texts
-        for (let i = floatingScores.length - 1; i >= 0; i--) {
-          const fs = floatingScores[i];
-          fs.y -= 0.6;
-          fs.life--;
-
-          ctx.save();
-          ctx.font = '800 11px monospace';
-          ctx.textAlign = 'center';
-          ctx.fillStyle = '#38bdf8';
-          ctx.fillText(`+${fs.text}`, fs.x, fs.y);
-          ctx.restore();
-
-          if (fs.life <= 0) floatingScores.splice(i, 1);
+          if (ft.alpha <= 0) {
+            floatingTexts.splice(i, 1);
+          } else {
+            ctx.save();
+            ctx.font = '900 16px monospace';
+            ctx.textAlign = 'center';
+            ctx.globalAlpha = ft.alpha;
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 3;
+            ctx.strokeText(ft.text, ft.x, ft.y);
+            ctx.fillStyle = ft.color;
+            ctx.fillText(ft.text, ft.x, ft.y);
+            ctx.restore();
+          }
         }
 
-        // 5. Draw HUD & Menus
-        drawHUD();
+        // Draw HUD & Menus
+        drawScore();
         drawStartScreen();
         drawGameOverScreen();
-        drawVictoryScreen();
+
+        ctx.restore();
       }
 
-      // Initialize maze and kick off loop
-      cloneMaze();
+      // Start the RAF Loop
       requestAnimationFrame(gameLoop);
     </script>
   </body>
